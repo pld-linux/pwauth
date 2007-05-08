@@ -1,0 +1,42 @@
+diff -Naur pwauth-2.3.2/config.h pwauth-2.3.2.oden/config.h
+--- pwauth-2.3.2/config.h	2004-09-29 03:07:18.000000000 +0200
++++ pwauth-2.3.2.oden/config.h	2006-03-19 21:08:31.000000000 +0100
+@@ -238,7 +238,7 @@
+  * last).
+  */
+ 
+-#define SERVER_UIDS 72		/* user "nobody" */
++/* #define SERVER_UIDS 72		/* user "nobody" */
+ 
+ 
+ /* If MIN_UNIX_UID is defined to an integer, logins with uid numbers less than
+diff -Naur pwauth-2.3.2/main.c pwauth-2.3.2.oden/main.c
+--- pwauth-2.3.2/main.c	2004-09-27 22:43:59.000000000 +0200
++++ pwauth-2.3.2.oden/main.c	2006-03-19 21:13:01.000000000 +0100
+@@ -38,9 +38,10 @@
+ int haveuid= 0;
+ #endif
+ 
++#ifdef SERVER_UIDS
+ /* Array of uid numbers that may run this program */
+ int server_uids[]= {SERVER_UIDS, 0};
+-
++#endif
+ 
+ main(int argc, char **argv)
+ {
+@@ -58,12 +59,14 @@
+     rlim.rlim_cur = rlim.rlim_max = 0;
+     (void)setrlimit(RLIMIT_CORE, &rlim);
+ 
++#ifdef SERVER_UIDS
+     /* Check that we were invoked by one of the listed uids or by root */
+     uid= getuid();
+     for (i= 0; server_uids[i] != 0 && server_uids[i] != uid; i++)
+ 	;
+     if (uid != server_uids[i])
+ 	exit(STATUS_INT_USER);
++#endif
+ 
+     /* Get the arguments (login and password) */
+ #ifdef ENV_METHOD
