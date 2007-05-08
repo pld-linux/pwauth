@@ -1,10 +1,12 @@
+# TODO
+# - we don't have group called apache
+# - consider removing version from patches next time when adding to our cvs
 Summary:	A Unix Web Authenticator
 Name:		pwauth
 Version:	2.3.2
 Release:	1
 License:	BSD
-Group:		System/Servers
-######		Unknown group!
+Group:		Daemons
 URL:		http://www.unixpapa.com/pwauth/
 Source0:	http://www.unixpapa.com/software/%{name}-%{version}.tar.gz
 Source1:	%{name}.pam
@@ -28,7 +30,6 @@ to check if a login/password is valid even though they don't
 themselves have read access to the system password database.
 
 %prep
-
 %setup -q
 %patch1 -p0
 %patch2 -p0
@@ -37,29 +38,26 @@ themselves have read access to the system password database.
 #bzcat %{SOURCE1} > pwauth.pam
 
 %build
-
-%{__make} CFLAGS="%{optflags}" LIB="-lpam -ldl"
+%{__make} \
+	CFLAGS="%{optflags}" \
+	LIB="-lpam -ldl"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/pam.d,%{_bindir}}
 
-install -d %{buildroot}%{_sysconfdir}/pam.d
-install -d %{buildroot}%{_bindir}
-
-install -m0755 pwauth %{buildroot}%{_bindir}/
-install -m0755 unixgroup %{buildroot}%{_bindir}/
-
-install -m0644 %{SOURCE1} %{buildroot}%{_sysconfdir}/pam.d/pwauth
-install -m0644 %{SOURCE1} %{buildroot}%{_sysconfdir}/pam.d/unixgroup
+install pwauth $RPM_BUILD_ROOT%{_bindir}
+install unixgroup $RPM_BUILD_ROOT%{_bindir}
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/pwauth
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/unixgroup
 
 %clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
 %doc CHANGES FORM_AUTH INSTALL README
-%attr(0644,root,root) %config(noreplace) %{_sysconfdir}/pam.d/pwauth
-%attr(0644,root,root) %config(noreplace) %{_sysconfdir}/pam.d/unixgroup
-%attr(04550,root,apache) %{_bindir}/pwauth
-%attr(04550,root,apache) %{_bindir}/unixgroup
+%config(noreplace) %verify(not md5 mtime size) /etc/pam.d/pwauth
+%config(noreplace) %verify(not md5 mtime size) /etc/pam.d/unixgroup
+%attr(4550,root,apache) %{_bindir}/pwauth
+%attr(4550,root,apache) %{_bindir}/unixgroup
