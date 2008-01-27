@@ -1,5 +1,4 @@
 # TODO
-# - we don't have group called apache
 # - consider removing version from patches next time when adding to our cvs
 Summary:	A Unix Web Authenticator
 Summary(pl.UTF-8):	Narzędzie uwierzytelniające dla WWW
@@ -51,6 +50,7 @@ przeczytać systemowej bazy danych haseł.
 
 %build
 %{__make} \
+	CC="%{__cc}" \
 	CFLAGS="%{optflags}" \
 	LIB="-lpam -ldl"
 
