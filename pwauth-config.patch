@@ -1,0 +1,71 @@
+--- config.h	2004-09-29 03:07:18.000000000 +0200
++++ config.h.oden	2006-03-19 21:19:48.000000000 +0100
+@@ -106,13 +106,13 @@
+ 
+ /* #define SHADOW_NONE		/**/
+ /* #define SHADOW_BSD		/* FreeBSD, NetBSD, OpenBSD, BSDI, OS X */
+-#define SHADOW_SUN		/* Linux, Solaris, IRIX */
++/* #define SHADOW_SUN		/* Linux, Solaris, IRIX */
+ /* #define SHADOW_JFH		/**/
+ /* #define SHADOW_MDW		/**/
+ /* #define SHADOW_AIX		/* AIX */
+ /* #define SHADOW_HPUX		/* HPUX ? */
+ 
+-/* #define PAM			/* Linux PAM or OpenPAM*/
++#define PAM			/* Linux PAM or OpenPAM*/
+ /* #define PAM_OS_X		/* PAM on OS X */
+ /* #define PAM_SOLARIS		/* PAM on Solaris other than 2.6 */
+ /* #define PAM_SOLARIS_26	/* PAM on Solaris 2.6 */
+@@ -192,8 +192,8 @@
+  * uid numbers.
+  */
+ 
+-#define UNIX_LASTLOG		/**/
+-#define HAVE_LASTLOG_H		/**/
++/* #define UNIX_LASTLOG		/**/
++/* #define HAVE_LASTLOG_H		/**/
+ 
+ 
+ /* If NOLOGIN_FILE is defined to the full path name of a file, then the
+@@ -238,7 +238,7 @@
+  * last).
+  */
+ 
+-#define SERVER_UIDS 72		/* user "nobody" */
++/* #define SERVER_UIDS 72		/* user "nobody" */
+ 
+ 
+ /* If MIN_UNIX_UID is defined to an integer, logins with uid numbers less than
+@@ -250,7 +250,7 @@
+  * given value will be accepted).
+  */
+ 
+-#define MIN_UNIX_UID 500	/**/
++/* #define MIN_UNIX_UID 500	/**/
+ 
+ 
+ /* If IGNORE_CASE is defined, the login given is checked in two different
+@@ -278,7 +278,7 @@
+  * SLEEP_LOCK.  SLEEP_TIME defaults to 2 seconds if not defined.
+  */
+ 
+-#define SLEEP_LOCK "/var/run/pwauth.lock"
++/* #define SLEEP_LOCK "/var/run/pwauth.lock"
+ 
+ 
+ /* If ENV_METHOD is defined, pwauth expects mod_auth_external to be configured
+--- main.c	2004-09-27 22:43:59.000000000 +0200
++++ main.c.oden	2006-03-19 21:24:23.000000000 +0100
+@@ -50,7 +50,11 @@
+     char login[BFSZ+1], passwd[BFSZ+1];
+     char *c, *strchr();
+ #endif
+-    int uid,i;
++
++#ifdef SERVER_UIDS
++    int uid;
++#endif
++    int i;
+     int status;
+     struct rlimit rlim;
+ 
