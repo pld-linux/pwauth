@@ -3,15 +3,15 @@
 Summary:	A Unix Web Authenticator
 Summary(pl.UTF-8):	Narzędzie uwierzytelniające dla WWW
 Name:		pwauth
-Version:	2.3.2
+Version:	2.3.8
 Release:	1
 License:	BSD
 Group:		Daemons
-Source0:	http://www.unixpapa.com/software/%{name}-%{version}.tar.gz
+Source0:	http://pwauth.googlecode.com/files/%{name}-%{version}.tar.gz
+# Source0-md5:	b41578a03d3876ddb2c4c550f88ede8c
 Source1:	%{name}.pam
-Patch1:		%{name}-2.3.2-config.diff
-Patch2:		%{name}-2.3.2-pam.diff
-Patch3:		%{name}-2.3.2-server.diff
+Patch0:		%{name}-config.patch
+Patch1:		%{name}-strchr.patch
 URL:		http://www.unixpapa.com/pwauth/
 BuildRequires:	pam-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -44,9 +44,8 @@ przeczytać systemowej bazy danych haseł.
 
 %prep
 %setup -q
-%patch1 -p0
-%patch2 -p0
-%patch3 -p1
+%patch0 -p1
+%patch1 -p1
 
 %build
 %{__make} \
