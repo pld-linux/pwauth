@@ -1,0 +1,11 @@
+--- pwauth-2.3.8/main.c~	2010-05-05 12:36:26.071130380 +0200
++++ pwauth-2.3.8/main.c	2010-05-05 12:38:01.477312014 +0200
+@@ -50,7 +50,7 @@
+     char *login, *passwd;
+ #else
+     char login[BFSZ+1], passwd[BFSZ+1];
+-    char *c, *strchr();
++    char *c;
+ #endif
+ 
+ #ifdef SERVER_UIDS
