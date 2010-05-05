@@ -1,5 +1,5 @@
---- config.h	2004-09-29 03:07:18.000000000 +0200
-+++ config.h.oden	2006-03-19 21:19:48.000000000 +0100
+--- pwauth/config.h	2004-09-29 03:07:18.000000000 +0200
++++ pwauth/config.h.oden	2006-03-19 21:19:48.000000000 +0100
 @@ -106,13 +106,13 @@
  
  /* #define SHADOW_NONE		/**/
@@ -54,8 +54,8 @@
  
  
  /* If ENV_METHOD is defined, pwauth expects mod_auth_external to be configured
---- main.c	2004-09-27 22:43:59.000000000 +0200
-+++ main.c.oden	2006-03-19 21:24:23.000000000 +0100
+--- pwauth/main.c	2004-09-27 22:43:59.000000000 +0200
++++ pwauth/main.c.oden	2006-03-19 21:24:23.000000000 +0100
 @@ -50,7 +50,11 @@
      char login[BFSZ+1], passwd[BFSZ+1];
      char *c, *strchr();
