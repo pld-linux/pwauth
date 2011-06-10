@@ -1,6 +1,6 @@
 --- pwauth/config.h	2004-09-29 03:07:18.000000000 +0200
 +++ pwauth/config.h.oden	2006-03-19 21:19:48.000000000 +0100
-@@ -106,13 +106,13 @@
+@@ -123,7 +123,7 @@
  
  /* #define SHADOW_NONE		/**/
  /* #define SHADOW_BSD		/* FreeBSD, NetBSD, OpenBSD, BSDI, OS X */
@@ -8,12 +8,14 @@
 +/* #define SHADOW_SUN		/* Linux, Solaris, IRIX */
  /* #define SHADOW_JFH		/**/
  /* #define SHADOW_MDW		/**/
- /* #define SHADOW_AIX		/* AIX */
- /* #define SHADOW_HPUX		/* HPUX ? */
+ /* #define SHADOW_AIX		/* AIX (see also AUTHENTICATE_AIX) */
+@@ -131,7 +131,7 @@
  
--/* #define PAM			/* Linux PAM or OpenPAM*/
-+#define PAM			/* Linux PAM or OpenPAM*/
- /* #define PAM_OS_X		/* PAM on OS X */
+    /* HIGH-LEVEL OPTIONS */
+ 
+-/* #define PAM			/* Linux PAM or OpenPAM */
++#define PAM			/* Linux PAM or OpenPAM */
+ /* #define PAM_OLD_OS_X		/* PAM on OS X version 10.5 or older */
  /* #define PAM_SOLARIS		/* PAM on Solaris other than 2.6 */
  /* #define PAM_SOLARIS_26	/* PAM on Solaris 2.6 */
 @@ -192,8 +192,8 @@

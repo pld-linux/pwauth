@@ -3,12 +3,12 @@
 Summary:	A Unix Web Authenticator
 Summary(pl.UTF-8):	Narzędzie uwierzytelniające dla WWW
 Name:		pwauth
-Version:	2.3.8
+Version:	2.3.9
 Release:	1
 License:	BSD
 Group:		Daemons
 Source0:	http://pwauth.googlecode.com/files/%{name}-%{version}.tar.gz
-# Source0-md5:	b41578a03d3876ddb2c4c550f88ede8c
+# Source0-md5:	eaa28b0a1faea428b0af574f8fe87d55
 Source1:	%{name}.pam
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-strchr.patch
